@@ -15,7 +15,7 @@
   <div class="page-head-inner">
     <div class="eyebrow"><span class="rule"></span>DESTINATIONS</div>
     <h1>景點美食</h1>
-    <p>依城區篩選景點,搭配當地美食與交通資訊,點「加入行程」即可收進行程表。</p>
+    <p>依城區篩選景點,搭配當地美食與交通資訊,點「加入行程」即可收進行程表。營業時間僅供參考,出發前建議再次確認。</p>
   </div>
 </header>
 
@@ -82,6 +82,14 @@ function renderSubtabs(){
 
 function cardHTML(item, areaName){
   const planned = isPlanned(plan, item.n);
+  const hoursRow = item.hours
+    ? `<p class="hours"><span class="hours-icon">⏱</span>${item.hours}</p>`
+    : '';
+  const mapRow = item.mapQuery
+    ? `<a class="map-link" href="${mapLink(item.mapQuery)}" target="_blank" rel="noopener">
+         <span class="map-icon">📍</span>在地圖上查看
+       </a>`
+    : '';
   return `
   <div class="card">
     <div class="card-top">
@@ -91,6 +99,8 @@ function cardHTML(item, areaName){
       </div>
     </div>
     <p class="desc">${item.d}</p>
+    ${hoursRow}
+    ${mapRow}
     <div class="card-foot">
       <span class="area-label">${areaName || ''}</span>
       <button class="add-btn ${planned?'added':''}" data-add="${item.n}">
