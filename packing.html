@@ -1,1 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>行李清單 · 首爾漫遊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<header class="page-head">
+  <div class="page-head-inner">
+    <div class="eyebrow"><span class="rule"></span>PACKING LIST</div>
+    <h1>行李清單</h1>
+    <p>六大分類的打包檢查表,點項目即可勾選,進度會自動儲存在這台裝置上。</p>
+  </div>
+</header>
+
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <a href="index.html">首頁</a>
+    <a href="destinations.html">景點美食</a>
+    <a href="itineraries.html">我的行程</a>
+    <a href="packing.html" class="active">行李清單</a>
+  </div>
+</nav>
+
+<main>
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="pct" id="progress-pct">0%</span>
+      <span class="label" id="progress-label">0 / 0 項已打包</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+
+  <div id="pack-categories"></div>
+
+  <div class="plan-toolbar">
+    <button class="ghost-btn" id="reset-btn">重設清單</button>
+  </div>
+</main>
+
+<footer>首爾漫遊 · 為自由行旅人設計的簡易規劃工具</footer>
+
+<script src="data.js"></script>
+<script>
+let packed = loadPacked();
+
+function itemKey(category, item){ return category + '::' + item; }
+
+function updateProgress(){
+  const total = PACKING.reduce((sum, c) => sum + c.items.length, 0);
+  const done = Object.values(packed).filter(Boolean).length;
+  const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+  document.getElementById('progress-pct').textContent = pct + '%';
+  document.getElementById('progress-label').textContent = `${done} / ${total} 項已打包`;
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+function render(){
+  document.getElementById('pack-categories').innerHTML = PACKING.map(cat => {
+    const doneCount = cat.items.filter(it => packed[itemKey(cat.category, it)]).length;
+    return `
+    <div class="pack-category">
+      <h3>${cat.category} <span class="count">${doneCount} / ${cat.items.length}</span></h3>
+      <div class="pack-items">
+        ${cat.items.map(it => {
+          const key = itemKey(cat.category, it);
+          const checked = !!packed[key];
+          return `<div class="pack-item ${checked?'checked':''}" data-key="${key}">
+            <span class="box">${checked ? '✓' : ''}</span>
+            <span class="text">${it}</span>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+  updateProgress();
+  bindEvents();
+}
+
+function bindEvents(){
+  document.querySelectorAll('[data-key]').forEach(el =>
+    el.onclick = () => {
+      const key = el.dataset.key;
+      packed[key] = !packed[key];
+      savePacked(packed);
+      render();
+    });
+}
+
+document.getElementById('reset-btn').onclick = () => {
+  packed = {};
+  savePacked(packed);
+  render();
+};
+
+render();
+</script>
+</body>
+</html>
