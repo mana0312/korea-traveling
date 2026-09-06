@@ -1,1 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>景點美食 · 首爾漫遊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<header class="page-head">
+  <div class="page-head-inner">
+    <div class="eyebrow"><span class="rule"></span>DESTINATIONS</div>
+    <h1>景點美食</h1>
+    <p>依城區篩選景點,搭配當地美食與交通資訊,點「加入行程」即可收進行程表。</p>
+  </div>
+</header>
+
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <a href="index.html">首頁</a>
+    <a href="destinations.html" class="active">景點美食</a>
+    <a href="itineraries.html">我的行程</a>
+    <a href="packing.html">行李清單</a>
+  </div>
+</nav>
+
+<main>
+  <!-- 加入到哪一天 -->
+  <div class="section-head">
+    <p style="margin-top:0;">選擇要加入的天數,再從下方點選「加入行程」。</p>
+  </div>
+  <div class="day-tabs" id="day-picker" style="margin-bottom:28px;"></div>
+
+  <div class="subtabs" id="subtabs"></div>
+
+  <section class="subpanel" id="subpanel-spots">
+    <div class="chip-row" id="area-chips"></div>
+    <div class="grid" id="spots-grid"></div>
+  </section>
+
+  <section class="subpanel" id="subpanel-food">
+    <div class="grid" id="food-grid"></div>
+  </section>
+
+  <section class="subpanel" id="subpanel-transit">
+    <div class="transit-list" id="transit-list"></div>
+  </section>
+</main>
+
+<footer>首爾漫遊 · 為自由行旅人設計的簡易規劃工具</footer>
+
+<script src="data.js"></script>
+<script>
+let currentSubtab = location.hash === '#transit' ? 'transit' : 'spots';
+let currentArea = AREAS[0].id;
+let plan = loadPlan();
+let selectedDay = loadSelectedDay();
+
+const SUBTABS = [
+  { id:'spots', label:'景點' },
+  { id:'food', label:'美食' },
+  { id:'transit', label:'交通' }
+];
+
+function renderDayPicker(){
+  document.getElementById('day-picker').innerHTML = [1,2,3].map(d =>
+    `<button class="day-tab ${selectedDay===d?'active':''}" data-day="${d}">加入到第 ${d} 天</button>`
+  ).join('');
+}
+
+function renderSubtabs(){
+  document.getElementById('subtabs').innerHTML = SUBTABS.map(t =>
+    `<button class="subtab-btn ${currentSubtab===t.id?'active':''}" data-subtab="${t.id}">${t.label}</button>`
+  ).join('');
+  document.querySelectorAll('.subpanel').forEach(p => p.classList.remove('active'));
+  document.getElementById('subpanel-' + currentSubtab).classList.add('active');
+}
+
+function cardHTML(item, areaName){
+  const planned = isPlanned(plan, item.n);
+  return `
+  <div class="card">
+    <div class="card-top">
+      <div>
+        <h3>${item.n}</h3>
+        <span class="tag">${item.tag}</span>
+      </div>
+    </div>
+    <p class="desc">${item.d}</p>
+    <div class="card-foot">
+      <span class="area-label">${areaName || ''}</span>
+      <button class="add-btn ${planned?'added':''}" data-add="${item.n}">
+        ${planned ? '已加入' : '加入行程'}
+      </button>
+    </div>
+  </div>`;
+}
+
+function renderSpots(){
+  const chips = document.getElementById('area-chips');
+  chips.innerHTML = AREAS.map(a =>
+    `<button class="chip ${currentArea===a.id?'active':''}" data-area="${a.id}">${a.name}</button>`
+  ).join('');
+  const area = AREAS.find(a => a.id === currentArea);
+  document.getElementById('spots-grid').innerHTML =
+    area.spots.map(s => cardHTML(s, area.name)).join('');
+}
+
+function renderFood(){
+  document.getElementById('food-grid').innerHTML =
+    FOOD.map(f => cardHTML(f, '美食')).join('');
+}
+
+function renderTransit(){
+  document.getElementById('transit-list').innerHTML = TRANSIT.map(t => `
+    <div class="transit-item">
+      <div class="transit-icon">${t.icon}</div>
+      <div>
+        <h3>${t.n}</h3>
+        <p>${t.d}</p>
+      </div>
+    </div>`).join('');
+}
+
+function renderAll(){
+  renderDayPicker();
+  renderSubtabs();
+  renderSpots();
+  renderFood();
+  renderTransit();
+  bindEvents();
+}
+
+function bindEvents(){
+  document.querySelectorAll('[data-day]').forEach(btn =>
+    btn.onclick = () => { selectedDay = parseInt(btn.dataset.day, 10); saveSelectedDay(selectedDay); renderDayPicker(); bindEvents(); });
+
+  document.querySelectorAll('[data-subtab]').forEach(btn =>
+    btn.onclick = () => { currentSubtab = btn.dataset.subtab; renderSubtabs(); bindEvents(); });
+
+  document.querySelectorAll('[data-area]').forEach(btn =>
+    btn.onclick = () => { currentArea = btn.dataset.area; renderSpots(); bindEvents(); });
+
+  document.querySelectorAll('[data-add]').forEach(btn =>
+    btn.onclick = () => {
+      const name = btn.dataset.add;
+      if(isPlanned(plan, name)) return;
+      plan[selectedDay].push(name);
+      savePlan(plan);
+      renderSpots();
+      renderFood();
+      bindEvents();
+    });
+}
+
+renderAll();
+</script>
+</body>
+</html>
