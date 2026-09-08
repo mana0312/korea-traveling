@@ -66,12 +66,12 @@ function renderPlan(){
     <div class="plan-item">
       <span class="plan-index">${String(i+1).padStart(2,'0')}</span>
       <div class="plan-main">
-        <span class="plan-name">${item.name}</span>
         <div class="plan-time">
           <input type="time" data-time="${i}:start" value="${item.start || ''}">
           <span class="plan-time-sep">–</span>
           <input type="time" data-time="${i}:end" value="${item.end || ''}">
         </div>
+        <span class="plan-name">${item.name}</span>
       </div>
       <div class="plan-actions">
         <button class="icon-btn" data-move="${i}:-1" aria-label="上移">↑</button>
