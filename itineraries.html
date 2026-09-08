@@ -31,6 +31,12 @@
 
 <main>
   <div class="day-tabs" id="day-tabs"></div>
+  <div class="day-date-row">
+    <label class="day-date-label">
+      <span>這天的日期</span>
+      <input type="date" id="day-date-input">
+    </label>
+  </div>
   <div class="plan-list" id="plan-list"></div>
   <div class="plan-toolbar">
     <button class="ghost-btn" id="export-btn">匯出文字行程</button>
@@ -43,11 +49,20 @@
 <script>
 let plan = loadPlan();
 let currentDay = loadSelectedDay();
+let tripDates = loadTripDates();
+
+function formatShortDate(dateStr){
+  if(!dateStr) return '';
+  const [y, m, d] = dateStr.split('-');
+  return `${parseInt(m,10)}/${parseInt(d,10)}`;
+}
 
 function renderDayTabs(){
-  document.getElementById('day-tabs').innerHTML = [1,2,3].map(d =>
-    `<button class="day-tab ${currentDay===d?'active':''}" data-day="${d}">第 ${d} 天</button>`
-  ).join('');
+  document.getElementById('day-tabs').innerHTML = [1,2,3].map(d => {
+    const short = formatShortDate(tripDates[d]);
+    return `<button class="day-tab ${currentDay===d?'active':''}" data-day="${d}">第 ${d} 天${short ? `<span class="day-tab-date">${short}</span>` : ''}</button>`;
+  }).join('');
+  document.getElementById('day-date-input').value = tripDates[currentDay] || '';
 }
 
 function normalizeItem(item){
@@ -121,12 +136,20 @@ function bindEvents(){
       plan[currentDay][idx][field] = input.value;
       savePlan(plan);
     });
+
+  document.getElementById('day-date-input').onchange = (e) => {
+    tripDates[currentDay] = e.target.value;
+    saveTripDates(tripDates);
+    renderDayTabs();
+    bindEvents();
+  };
 }
 
 document.getElementById('export-btn').onclick = () => {
   let text = '首爾行程規劃\n\n';
   [1,2,3].forEach(d => {
-    text += `第 ${d} 天\n`;
+    const dateLabel = tripDates[d] ? `(${tripDates[d]})` : '';
+    text += `第 ${d} 天 ${dateLabel}\n`;
     if(plan[d].length === 0){
       text += '(尚未安排)\n';
     } else {
