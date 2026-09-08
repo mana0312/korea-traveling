@@ -85,6 +85,21 @@ function isPlanned(plan, name){
   );
 }
 
+/* ---------------- Flight info state (localStorage) ---------------- */
+function emptyFlight(){
+  return { airline:'', flightNo:'', date:'', depAirport:'', depTime:'', arrAirport:'', arrTime:'', terminal:'', note:'' };
+}
+function loadFlights(){
+  try{
+    const raw = localStorage.getItem('seoul-flights');
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return { outbound: emptyFlight(), inbound: emptyFlight() };
+}
+function saveFlights(flights){
+  try{ localStorage.setItem('seoul-flights', JSON.stringify(flights)); }catch(e){}
+}
+
 /* ---------------- Packing checklist state (localStorage) ---------------- */
 function loadPacked(){
   try{
