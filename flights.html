@@ -1,1 +1,101 @@
+html
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>機場航班 · 首爾漫遊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<header class="page-head">
+  <div class="page-head-inner">
+    <div class="eyebrow"><span class="rule"></span>FLIGHTS</div>
+    <h1>機場航班</h1>
+    <p>填入去程與回程的航班資訊,方便隨時查看,內容會自動儲存在這台裝置上。</p>
+  </div>
+</header>
+
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <a href="index.html">首頁</a>
+    <a href="destinations.html">景點美食</a>
+    <a href="itineraries.html">我的行程</a>
+    <a href="flights.html" class="active">機場航班</a>
+    <a href="packing.html">行李清單</a>
+  </div>
+</nav>
+
+<main>
+  <div id="flight-cards"></div>
+</main>
+
+<footer>首爾漫遊 · 為自由行旅人設計的簡易規劃工具</footer>
+
+<script src="data.js"></script>
+<script>
+let flights = loadFlights();
+
+const LEGS = [
+  { key:'outbound', label:'去程', hint:'台灣 → 首爾' },
+  { key:'inbound', label:'回程', hint:'首爾 → 台灣' }
+];
+
+const FIELDS = [
+  { key:'airline', label:'航空公司', type:'text', placeholder:'例如:大韓航空' },
+  { key:'flightNo', label:'航班編號', type:'text', placeholder:'例如:KE185' },
+  { key:'date', label:'飛行日期', type:'date' },
+  { key:'depAirport', label:'出發機場', type:'text', placeholder:'例如:桃園國際機場 T1' },
+  { key:'depTime', label:'起飛時間', type:'time' },
+  { key:'arrAirport', label:'抵達機場', type:'text', placeholder:'例如:仁川國際機場 T2' },
+  { key:'arrTime', label:'抵達時間', type:'time' },
+  { key:'terminal', label:'航廈 / 登機門', type:'text', placeholder:'例如:T2 / Gate 32(登機門常於起飛前確認)' },
+  { key:'note', label:'訂位代號 / 備註', type:'text', placeholder:'例如:訂位代號 AB1CD2' }
+];
+
+function fieldHTML(leg, field, value){
+  return `
+  <label class="flight-field">
+    <span class="flight-field-label">${field.label}</span>
+    <input type="${field.type}" data-flight="${leg}:${field.key}" value="${value || ''}" placeholder="${field.placeholder || ''}">
+  </label>`;
+}
+
+function cardHTML(leg){
+  const data = flights[leg.key] || emptyFlight();
+  return `
+  <div class="flight-card">
+    <div class="flight-card-head">
+      <h3>${leg.label}</h3>
+      <span class="flight-hint">${leg.hint}</span>
+    </div>
+    <div class="flight-grid">
+      ${FIELDS.map(f => fieldHTML(leg.key, f, data[f.key])).join('')}
+    </div>
+  </div>`;
+}
+
+function render(){
+  document.getElementById('flight-cards').innerHTML =
+    LEGS.map(leg => cardHTML(leg)).join('');
+  bindEvents();
+}
+
+function bindEvents(){
+  document.querySelectorAll('[data-flight]').forEach(input =>
+    input.onchange = () => {
+      const [leg, key] = input.dataset.flight.split(':');
+      if(!flights[leg]) flights[leg] = emptyFlight();
+      flights[leg][key] = input.value;
+      saveFlights(flights);
+    });
+}
+
+render();
+</script>
+</body>
+</html>
