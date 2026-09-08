@@ -49,6 +49,10 @@ function renderDayTabs(){
   ).join('');
 }
 
+function normalizeItem(item){
+  return typeof item === 'string' ? { name:item, start:'', end:'' } : item;
+}
+
 function renderPlan(){
   const list = plan[currentDay];
   const container = document.getElementById('plan-list');
@@ -56,16 +60,26 @@ function renderPlan(){
     container.innerHTML = `<div class="empty-state">這天還沒有安排,前往「景點美食」頁面點選加入行程。</div>`;
     return;
   }
-  container.innerHTML = list.map((name, i) => `
+  container.innerHTML = list.map((raw, i) => {
+    const item = normalizeItem(raw);
+    return `
     <div class="plan-item">
       <span class="plan-index">${String(i+1).padStart(2,'0')}</span>
-      <span class="plan-name">${name}</span>
+      <div class="plan-main">
+        <span class="plan-name">${item.name}</span>
+        <div class="plan-time">
+          <input type="time" data-time="${i}:start" value="${item.start || ''}">
+          <span class="plan-time-sep">–</span>
+          <input type="time" data-time="${i}:end" value="${item.end || ''}">
+        </div>
+      </div>
       <div class="plan-actions">
         <button class="icon-btn" data-move="${i}:-1" aria-label="上移">↑</button>
         <button class="icon-btn" data-move="${i}:1" aria-label="下移">↓</button>
         <button class="icon-btn" data-remove="${i}" aria-label="移除">✕</button>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 
 function renderAll(){
@@ -97,6 +111,15 @@ function bindEvents(){
       renderPlan();
       bindEvents();
     });
+
+  document.querySelectorAll('[data-time]').forEach(input =>
+    input.onchange = () => {
+      const [idxStr, field] = input.dataset.time.split(':');
+      const idx = parseInt(idxStr, 10);
+      plan[currentDay][idx] = normalizeItem(plan[currentDay][idx]);
+      plan[currentDay][idx][field] = input.value;
+      savePlan(plan);
+    });
 }
 
 document.getElementById('export-btn').onclick = () => {
@@ -106,7 +129,11 @@ document.getElementById('export-btn').onclick = () => {
     if(plan[d].length === 0){
       text += '(尚未安排)\n';
     } else {
-      plan[d].forEach((name, i) => { text += `${i+1}. ${name}\n`; });
+      plan[d].forEach((raw, i) => {
+        const item = normalizeItem(raw);
+        const time = (item.start || item.end) ? ` (${item.start || '?'}–${item.end || '?'})` : '';
+        text += `${i+1}. ${item.name}${time}\n`;
+      });
     }
     text += '\n';
   });
