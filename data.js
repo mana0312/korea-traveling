@@ -1,8 +1,5 @@
 /* ---------------- Shared data ---------------- */
 const AREAS = [
-  { id:'Airport', name:'機場', spots:[
-  { n:'桃園國際機場第一航廈（T1）', tag:'機場', hours:'24小時', mapQuery:'第一航廈' },  
-]},
   { id:'jongno', name:'鐘路 / 北村', spots:[
     { n:'景福宮', tag:'古宮', d:'朝鮮王朝正宮,每日兩場守衛交接儀式,建議租借韓服可免門票。', hours:'09:00–18:00(週二公休,依季節調整閉館時間)', mapQuery:'Gyeongbokgung Palace Seoul' },
     { n:'北村韓屋村', tag:'散步', d:'保存完整的傳統韓屋巷弄,清晨人少最適合拍照。', hours:'全天開放(部分為住宅區,請放低音量)', mapQuery:'Bukchon Hanok Village Seoul' },
@@ -27,6 +24,10 @@ const AREAS = [
   { id:'dongdaemun', name:'東大門', spots:[
     { n:'東大門設計廣場 DDP', tag:'建築', d:'扎哈·哈蒂設計的流線型建築,常有設計展覽。', hours:'10:00–20:00(部分展覽延長至22:00)', mapQuery:'Dongdaemun Design Plaza Seoul' },
     { n:'東大門批發商場', tag:'購物', d:'深夜營業的服飾批發大樓,淩晨仍人潮不斷。', hours:'20:00–翌日05:00(依大樓而異,部分白天也營業)', mapQuery:'Dongdaemun Market Seoul' }
+  ]},
+  { id:'airport', name:'機場', spots:[
+    { n:'桃園國際機場', tag:'機場', d:'台灣主要國際機場,分為第一、第二航廈,兩航廈間有機場捷運與接駁車連接,並有機場捷運直達台北車站。', hours:'24小時開放(各航空公司櫃檯時間不同)', mapQuery:'Taoyuan International Airport' },
+    { n:'仁川國際機場', tag:'機場', d:'韓國主要國際機場,首爾自由行最常使用的入境機場,分為第一、第二航廈,可搭機場快線 AREX 直達首爾站。', hours:'24小時開放(各航空公司櫃檯時間不同)', mapQuery:'Incheon International Airport' }
   ]}
 ];
 
@@ -102,8 +103,6 @@ function loadFlights(){
 function saveFlights(flights){
   try{ localStorage.setItem('seoul-flights', JSON.stringify(flights)); }catch(e){}
 }
-
-/* ---------------- Packing checklist state (localStorage) ---------------- */
 function loadPacked(){
   try{
     const raw = localStorage.getItem('seoul-packed');
