@@ -211,8 +211,16 @@ main{max-width:920px; margin:0 auto; padding:40px 24px 100px;}
   font-family:'Noto Serif TC', serif; font-size:15px; color:var(--gold);
   width:20px; flex-shrink:0;
 }
-.plan-name{flex:1; font-size:15px;}
-.plan-actions{display:flex; gap:4px;}
+.plan-main{flex:1; display:flex; flex-direction:column; gap:6px; min-width:0;}
+.plan-name{font-size:15px;}
+.plan-time{display:flex; align-items:center; gap:6px;}
+.plan-time input[type="time"]{
+  font-family:'Noto Sans TC', sans-serif; font-size:13px; color:var(--text-main);
+  border:1px solid var(--line); border-radius:8px; padding:4px 8px;
+  background:var(--paper-dim);
+}
+.plan-time-sep{color:var(--text-sub); font-size:13px;}
+.plan-actions{display:flex; gap:4px; flex-shrink:0;}
 .icon-btn{
   appearance:none; border:1px solid var(--line); background:#fff; cursor:pointer;
   width:30px; height:30px; border-radius:8px; color:var(--text-sub);
@@ -270,3 +278,4 @@ footer{
   .page-head{padding:32px 20px;}
   main{padding:32px 16px 80px;}
   .grid{grid-template-columns:1fr;}
+}
