@@ -159,7 +159,7 @@ function bindEvents(){
     btn.onclick = () => {
       const name = btn.dataset.add;
       if(isPlanned(plan, name)) return;
-      plan[selectedDay].push(name);
+      plan[selectedDay].push({ name, start:'', end:'' });
       savePlan(plan);
       renderSpots();
       renderFood();
