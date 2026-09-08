@@ -80,7 +80,9 @@ function saveSelectedDay(day){
   try{ localStorage.setItem('seoul-selected-day', String(day)); }catch(e){}
 }
 function isPlanned(plan, name){
-  return Object.values(plan).some(list => list.includes(name));
+  return Object.values(plan).some(list =>
+    list.some(item => (typeof item === 'string' ? item === name : item.name === name))
+  );
 }
 
 /* ---------------- Packing checklist state (localStorage) ---------------- */
