@@ -1,7 +1,8 @@
 /* ---------------- Shared data ---------------- */
 const AREAS = [
   { id:'Yongsan gu', name:'龍山區', spots:[ 
-    { n:'漢南洞', tag:'購物', d:'時尚購物聖地。', hours:'11:00–20:00(依店家調整營業時間)', mapQuery:'漢南洞' },    
+    { n:'漢南洞', tag:'購物', d:'時尚購物聖地。', hours:'11:00–20:00(依店家調整營業時間)', mapQuery:'漢南洞' }, 
+  ]},   
   { id:'jongno', name:'鐘路 / 北村', spots:[
     { n:'景福宮', tag:'古宮', d:'朝鮮王朝正宮,每日兩場守衛交接儀式,建議租借韓服可免門票。', hours:'09:00–18:00(週二公休,依季節調整閉館時間)', mapQuery:'Gyeongbokgung Palace Seoul' },
     { n:'北村韓屋村', tag:'散步', d:'保存完整的傳統韓屋巷弄,清晨人少最適合拍照。', hours:'全天開放(部分為住宅區,請放低音量)', mapQuery:'Bukchon Hanok Village Seoul' },
