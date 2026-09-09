@@ -1,8 +1,5 @@
 /* ---------------- Shared data ---------------- */
 const AREAS = [
-  { id:'Yongsan-gu', name:'龍山區', spots:[  
-    { n:'漢南洞', tag:'購物聖地', d:'聚集了許多知名韓國潮牌與高質感咖啡廳，街道氛圍融合文青與潮流時尚。', hours:'11:00 –20:00 (部分星期一或星期二公休,依季節調整營業時間)', mapQuery:'Hannam-dong' },    
- ]},  
   { id:'jongno', name:'鐘路 / 北村', spots:[
     { n:'景福宮', tag:'古宮', d:'朝鮮王朝正宮,每日兩場守衛交接儀式,建議租借韓服可免門票。', hours:'09:00–18:00(週二公休,依季節調整閉館時間)', mapQuery:'Gyeongbokgung Palace Seoul' },
     { n:'北村韓屋村', tag:'散步', d:'保存完整的傳統韓屋巷弄,清晨人少最適合拍照。', hours:'全天開放(部分為住宅區,請放低音量)', mapQuery:'Bukchon Hanok Village Seoul' },
@@ -30,7 +27,6 @@ const AREAS = [
   ]},
   { id:'airport', name:'機場', spots:[
     { n:'桃園國際機場', tag:'機場', d:'台灣主要國際機場,分為第一、第二航廈,兩航廈間有機場捷運與接駁車連接,並有機場捷運直達台北車站。', hours:'24小時開放(各航空公司櫃檯時間不同)', mapQuery:'Taoyuan International Airport' },
-    { n:'清州國際機場', tag:'機場', d:'位於韓國忠清北道清州市，是韓國中部的重要國際機場。', hours:'24小時開放(各航空公司櫃檯時間不同)', mapQuery:'清州國際機場' },    
     { n:'仁川國際機場', tag:'機場', d:'韓國主要國際機場,首爾自由行最常使用的入境機場,分為第一、第二航廈,可搭機場快線 AREX 直達首爾站。', hours:'24小時開放(各航空公司櫃檯時間不同)', mapQuery:'Incheon International Airport' }
   ]}
 ];
@@ -101,6 +97,21 @@ function loadTripDates(){
 }
 function saveTripDates(dates){
   try{ localStorage.setItem('seoul-trip-dates', JSON.stringify(dates)); }catch(e){}
+}
+
+/* ---------------- Accommodation state (localStorage) ---------------- */
+function emptyStay(){
+  return { id: Date.now() + Math.random().toString(16).slice(2), name:'', address:'', checkin:'', checkout:'', confirmNo:'', phone:'', note:'' };
+}
+function loadStays(){
+  try{
+    const raw = localStorage.getItem('seoul-stays');
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return [];
+}
+function saveStays(stays){
+  try{ localStorage.setItem('seoul-stays', JSON.stringify(stays)); }catch(e){}
 }
 
 /* ---------------- Flight info state (localStorage) ---------------- */
