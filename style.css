@@ -194,9 +194,9 @@ main{max-width:920px; margin:0 auto; padding:40px 24px 100px;}
 .transit-item p{font-size:14px; color:var(--text-sub);}
 
 /* ---------- Itinerary ---------- */
-.day-tabs{display:flex; gap:8px; margin-bottom:22px;}
+.day-tabs{display:flex; gap:8px; margin-bottom:22px; flex-wrap:wrap;}
 .day-tab{
-  flex:1; appearance:none; cursor:pointer; border:1px solid var(--line);
+  flex:1; min-width:70px; appearance:none; cursor:pointer; border:1px solid var(--line);
   background:#fff; border-radius:10px; padding:12px; text-align:center;
   font-family:'Noto Sans TC', sans-serif; font-weight:500; color:var(--text-sub);
 }
@@ -298,6 +298,13 @@ footer{
   background:var(--paper-dim);
 }
 .flight-field input:focus{outline:2px solid var(--teal); outline-offset:1px;}
+.flight-field-wide{grid-column:1 / -1;}
+.flight-field textarea{
+  font-family:'Noto Sans TC', sans-serif; font-size:14px; color:var(--text-main);
+  border:1px solid var(--line); border-radius:8px; padding:9px 12px;
+  background:var(--paper-dim); resize:vertical; line-height:1.6;
+}
+.flight-field textarea:focus{outline:2px solid var(--teal); outline-offset:1px;}
 
 @media (max-width:520px){
   .hero{padding:48px 20px 72px;}
