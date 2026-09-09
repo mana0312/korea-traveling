@@ -1,1 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>住宿 · 首爾漫遊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<header class="page-head">
+  <div class="page-head-inner">
+    <div class="eyebrow"><span class="rule"></span>ACCOMMODATION</div>
+    <h1>住宿</h1>
+    <p>記錄每一晚住哪裡、入住退房時間跟訂房代號,可以新增多筆,內容會自動儲存在這台裝置上。</p>
+  </div>
+</header>
+
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <a href="index.html">首頁</a>
+    <a href="destinations.html">景點美食</a>
+    <a href="itineraries.html">我的行程</a>
+    <a href="flights.html">機場航班</a>
+    <a href="accommodation.html" class="active">住宿</a>
+    <a href="packing.html">行李清單</a>
+  </div>
+</nav>
+
+<main>
+  <div id="stay-cards"></div>
+  <div class="plan-toolbar" style="justify-content:flex-start;">
+    <button class="ghost-btn" id="add-stay-btn">+ 新增住宿</button>
+  </div>
+</main>
+
+<footer>首爾漫遊 · 為自由行旅人設計的簡易規劃工具</footer>
+
+<script src="data.js"></script>
+<script>
+let stays = loadStays();
+
+const FIELDS = [
+  { key:'name', label:'住宿名稱', type:'text', placeholder:'例如:明洞XX飯店' },
+  { key:'address', label:'地址', type:'text', placeholder:'例如:首爾市中區退溪路XX號' },
+  { key:'checkin', label:'入住日期', type:'date' },
+  { key:'checkout', label:'退房日期', type:'date' },
+  { key:'confirmNo', label:'訂房代號', type:'text', placeholder:'例如:CONF123456' },
+  { key:'phone', label:'聯絡電話', type:'text', placeholder:'例如:+82-2-1234-5678' },
+  { key:'note', label:'備註', type:'text', placeholder:'例如:含早餐、可寄放行李' }
+];
+
+function fieldHTML(stayId, field, value){
+  return `
+  <label class="flight-field">
+    <span class="flight-field-label">${field.label}</span>
+    <input type="${field.type}" data-stay="${stayId}:${field.key}" value="${value || ''}" placeholder="${field.placeholder || ''}">
+  </label>`;
+}
+
+function cardHTML(stay, index){
+  const mapRow = stay.address
+    ? `<a class="map-link" href="${mapLink(stay.address)}" target="_blank" rel="noopener">
+         <span class="map-icon">📍</span>在地圖上查看
+       </a>`
+    : '';
+  return `
+  <div class="flight-card">
+    <div class="flight-card-head">
+      <h3>住宿 ${index + 1}</h3>
+      <span class="flight-hint">${stay.name || '尚未命名'}</span>
+      <button class="icon-btn stay-remove" data-remove-stay="${stay.id}" aria-label="移除" style="margin-left:auto;">✕</button>
+    </div>
+    <div class="flight-grid">
+      ${FIELDS.map(f => fieldHTML(stay.id, f, stay[f.key])).join('')}
+    </div>
+    <div style="margin-top:14px;">${mapRow}</div>
+  </div>`;
+}
+
+function render(){
+  const container = document.getElementById('stay-cards');
+  if(stays.length === 0){
+    container.innerHTML = `<div class="empty-state">還沒有加入住宿資訊,點下方「新增住宿」開始填寫。</div>`;
+  } else {
+    container.innerHTML = stays.map((s, i) => cardHTML(s, i)).join('');
+  }
+  bindEvents();
+}
+
+function bindEvents(){
+  document.querySelectorAll('[data-stay]').forEach(input =>
+    input.onchange = () => {
+      const [id, key] = input.dataset.stay.split(':');
+      const stay = stays.find(s => s.id === id);
+      if(stay){
+        stay[key] = input.value;
+        saveStays(stays);
+        if(key === 'name' || key === 'address') render();
+      }
+    });
+
+  document.querySelectorAll('[data-remove-stay]').forEach(btn =>
+    btn.onclick = () => {
+      stays = stays.filter(s => s.id !== btn.dataset.removeStay);
+      saveStays(stays);
+      render();
+    });
+}
+
+document.getElementById('add-stay-btn').onclick = () => {
+  stays.push(emptyStay());
+  saveStays(stays);
+  render();
+};
+
+render();
+</script>
+</body>
+</html>
