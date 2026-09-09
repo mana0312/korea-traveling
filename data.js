@@ -27,6 +27,7 @@ const AREAS = [
   ]},
   { id:'airport', name:'機場', spots:[
     { n:'桃園國際機場', tag:'機場', d:'台灣主要國際機場,分為第一、第二航廈,兩航廈間有機場捷運與接駁車連接,並有機場捷運直達台北車站。', hours:'24小時開放(各航空公司櫃檯時間不同)', mapQuery:'Taoyuan International Airport' },
+    { n:'清州國際機場', tag:'機場', d:'位於韓國忠清北道清州市，是韓國中部的重要國際機場。', hours:'24小時開放(各航空公司櫃檯時間不同)', mapQuery:'清州國際機場' },    
     { n:'仁川國際機場', tag:'機場', d:'韓國主要國際機場,首爾自由行最常使用的入境機場,分為第一、第二航廈,可搭機場快線 AREX 直達首爾站。', hours:'24小時開放(各航空公司櫃檯時間不同)', mapQuery:'Incheon International Airport' }
   ]}
 ];
