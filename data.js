@@ -63,12 +63,19 @@ function mapLink(query){
 }
 
 /* ---------------- Shared itinerary state (localStorage) ---------------- */
+const DAY_COUNT = 4;
+
+function emptyPlanObj(){
+  const obj = {};
+  for(let i=1; i<=DAY_COUNT; i++) obj[i] = [];
+  return obj;
+}
 function loadPlan(){
   try{
     const raw = localStorage.getItem('seoul-plan');
     if(raw) return JSON.parse(raw);
   }catch(e){}
-  return { 1:[], 2:[], 3:[] };
+  return emptyPlanObj();
 }
 function savePlan(plan){
   try{ localStorage.setItem('seoul-plan', JSON.stringify(plan)); }catch(e){}
@@ -76,7 +83,7 @@ function savePlan(plan){
 function loadSelectedDay(){
   try{
     const d = parseInt(localStorage.getItem('seoul-selected-day'), 10);
-    if([1,2,3].includes(d)) return d;
+    if(d >= 1 && d <= DAY_COUNT) return d;
   }catch(e){}
   return 1;
 }
@@ -93,7 +100,9 @@ function loadTripDates(){
     const raw = localStorage.getItem('seoul-trip-dates');
     if(raw) return JSON.parse(raw);
   }catch(e){}
-  return { 1:'', 2:'', 3:'' };
+  const obj = {};
+  for(let i=1; i<=DAY_COUNT; i++) obj[i] = '';
+  return obj;
 }
 function saveTripDates(dates){
   try{ localStorage.setItem('seoul-trip-dates', JSON.stringify(dates)); }catch(e){}
@@ -138,3 +147,66 @@ function loadPacked(){
 function savePacked(packed){
   try{ localStorage.setItem('seoul-packed', JSON.stringify(packed)); }catch(e){}
 }
+
+/* ---------------- Seed: your full itinerary + accommodation ---------------- */
+const SEED_TRIP_DATES = { 1:'2026-09-26', 2:'2026-09-27', 3:'2026-09-28', 4:'2026-09-29' };
+
+const SEED_PLAN = {
+  1: [
+    { name:'清州入境與轉乘高鐵進首爾', start:'07:00', end:'10:30' },
+    { name:'漢南洞:潮流商圈選物與巡禮', start:'11:30', end:'16:00' },
+    { name:'新沙洞林蔭道:旗艦店逛街與咖啡', start:'16:00', end:'18:30' },
+    { name:'晚餐:小小烤腸(소소막창)', start:'18:30', end:'20:00' },
+    { name:'解放村:新興市場夜景小酌', start:'20:00', end:'21:00' },
+    { name:'盤浦漢江公園:夜景與外送炸雞', start:'21:00', end:'22:30' }
+  ],
+  2: [
+    { name:'安國/鐘路:排隊名店早餐', start:'08:00', end:'10:30' },
+    { name:'北村韓屋村/景福宮:韓服體驗', start:'10:30', end:'12:30' },
+    { name:'午餐:三清洞麵片湯', start:'12:30', end:'14:00' },
+    { name:'益善洞:韓屋巷弄與質感咖啡廳', start:'14:30', end:'17:30' },
+    { name:'晚餐:益善洞烤肉街', start:'18:00', end:'20:00' },
+    { name:'清溪川夜間散步', start:'20:00', end:'21:30' }
+  ],
+  3: [
+    { name:'聖水洞:工業風潮流重鎮與午餐', start:'11:00', end:'15:30' },
+    { name:'弘大商圈:年輕潮流與美妝購物', start:'16:00', end:'18:30' },
+    { name:'晚餐:豬腳小姐 Myth Jokbal(弘大總店)', start:'18:30', end:'20:30' },
+    { name:'汗蒸幕:SPARREX 東大門店', start:'21:00', end:'23:30' }
+  ],
+  4: [
+    { name:'首爾站退房,前往首爾站', start:'07:30', end:'08:00' },
+    { name:'搭乘 AREX 直達列車前往仁川機場', start:'08:30', end:'09:15' },
+    { name:'抵達仁川機場,報到退稅與安檢', start:'09:30', end:'10:30' }
+  ]
+};
+
+const SEED_STAY = {
+  id: 'seed-stay-1',
+  name: '首爾住宿(新堂洞)',
+  address: '首爾市中區新堂洞281-27(53-3 Dasan-ro 42na-gil, Seoul 04585)',
+  checkin: '2026-09-26',
+  checkout: '2026-09-29',
+  confirmNo: '',
+  phone: '',
+  note: '機場巴士:抵達東大門歷史文化公園站,換乘地鐵在新堂站下車(步行6分鐘)。機場快線:仁川機場T1站上車,弘益大學站轉2號線,新堂站下車(步行6分鐘)。從新堂站6號出口直行200公尺,在耶穌基督後期聖徒教會(教堂與Homeplus Express之間小路)左轉,直行200公尺於King Discount Mart左轉,進入Nail Mono與S Motel之間的小路步行29公尺,可見S Motel旁一棟白色兩層樓房(位於巷內)。'
+};
+
+function seedTripDataIfNeeded(){
+  try{
+    if(localStorage.getItem('seoul-seed-v1')) return;
+    localStorage.setItem('seoul-seed-v1', '1');
+
+    const plan = loadPlan();
+    const planIsEmpty = Object.values(plan).every(list => list.length === 0);
+    if(planIsEmpty) savePlan(JSON.parse(JSON.stringify(SEED_PLAN)));
+
+    const dates = loadTripDates();
+    const datesAreEmpty = Object.values(dates).every(v => !v);
+    if(datesAreEmpty) saveTripDates({ ...SEED_TRIP_DATES });
+
+    const stays = loadStays();
+    if(stays.length === 0) saveStays([{ ...SEED_STAY }]);
+  }catch(e){}
+}
+seedTripDataIfNeeded();
