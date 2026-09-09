@@ -1,3 +1,4 @@
+/* ---------------- Shared data ---------------- */
 const AREAS = [
   { id:'jongno', name:'鐘路 / 北村', spots:[
     { n:'景福宮', tag:'古宮', d:'朝鮮王朝正宮,每日兩場守衛交接儀式,建議租借韓服可免門票。', hours:'09:00–18:00(週二公休,依季節調整閉館時間)', mapQuery:'Gyeongbokgung Palace Seoul' },
@@ -86,6 +87,16 @@ function isPlanned(plan, name){
   return Object.values(plan).some(list =>
     list.some(item => (typeof item === 'string' ? item === name : item.name === name))
   );
+}
+function loadTripDates(){
+  try{
+    const raw = localStorage.getItem('seoul-trip-dates');
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return { 1:'', 2:'', 3:'' };
+}
+function saveTripDates(dates){
+  try{ localStorage.setItem('seoul-trip-dates', JSON.stringify(dates)); }catch(e){}
 }
 
 /* ---------------- Flight info state (localStorage) ---------------- */
