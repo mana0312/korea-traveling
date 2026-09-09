@@ -45,19 +45,22 @@ let stays = loadStays();
 
 const FIELDS = [
   { key:'name', label:'住宿名稱', type:'text', placeholder:'例如:明洞XX飯店' },
-  { key:'address', label:'地址', type:'text', placeholder:'例如:首爾市中區退溪路XX號' },
+  { key:'address', label:'地址', type:'textarea', wide:true, placeholder:'例如:首爾市中區退溪路XX號' },
   { key:'checkin', label:'入住日期', type:'date' },
   { key:'checkout', label:'退房日期', type:'date' },
   { key:'confirmNo', label:'訂房代號', type:'text', placeholder:'例如:CONF123456' },
   { key:'phone', label:'聯絡電話', type:'text', placeholder:'例如:+82-2-1234-5678' },
-  { key:'note', label:'備註', type:'text', placeholder:'例如:含早餐、可寄放行李' }
+  { key:'note', label:'備註 / 交通指引', type:'textarea', wide:true, placeholder:'例如:含早餐、可寄放行李,或抵達方式指引' }
 ];
 
 function fieldHTML(stayId, field, value){
+  const control = field.type === 'textarea'
+    ? `<textarea data-stay="${stayId}:${field.key}" placeholder="${field.placeholder || ''}" rows="3">${value || ''}</textarea>`
+    : `<input type="${field.type}" data-stay="${stayId}:${field.key}" value="${value || ''}" placeholder="${field.placeholder || ''}">`;
   return `
-  <label class="flight-field">
+  <label class="flight-field${field.wide ? ' flight-field-wide' : ''}">
     <span class="flight-field-label">${field.label}</span>
-    <input type="${field.type}" data-stay="${stayId}:${field.key}" value="${value || ''}" placeholder="${field.placeholder || ''}">
+    ${control}
   </label>`;
 }
 
