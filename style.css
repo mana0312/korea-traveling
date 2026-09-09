@@ -286,7 +286,7 @@ footer{
   background:#fff; border:1px solid var(--line); border-radius:var(--radius);
   padding:22px; margin-bottom:20px;
 }
-.flight-card-head{display:flex; align-items:baseline; gap:10px; margin-bottom:18px;}
+.flight-card-head{display:flex; align-items:center; gap:10px; margin-bottom:18px;}
 .flight-card-head h3{font-size:19px; color:var(--ink);}
 .flight-hint{font-size:13px; color:var(--text-sub);}
 .flight-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:14px;}
