@@ -306,6 +306,23 @@ footer{
 }
 .flight-field textarea:focus{outline:2px solid var(--teal); outline-offset:1px;}
 
+/* ---------- Navigate / route planning ---------- */
+.location-status{
+  font-size:14px; padding:12px 14px; border-radius:10px;
+  background:var(--paper-dim); color:var(--text-sub); border:1px solid var(--line);
+}
+.location-status.loading{color:var(--text-main);}
+.location-status.success{background:rgba(47,110,104,0.1); border-color:var(--teal); color:var(--teal);}
+.location-status.error{background:rgba(230,57,113,0.08); border-color:var(--magenta); color:var(--magenta-dark);}
+.flight-field select{
+  font-family:'Noto Sans TC', sans-serif; font-size:14px; color:var(--text-main);
+  border:1px solid var(--line); border-radius:8px; padding:9px 12px;
+  background:#fff;
+}
+.mode-row{display:flex; gap:8px; flex-wrap:wrap;}
+.mode-btn{font-family:'Noto Sans TC', sans-serif;}
+.nav-hint{font-size:13px; color:var(--text-sub); margin-top:10px;}
+
 @media (max-width:520px){
   .hero{padding:48px 20px 72px;}
   .page-head{padding:32px 20px;}
