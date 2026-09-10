@@ -1,1 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>路線規劃 · 首爾漫遊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<header class="page-head">
+  <div class="page-head-inner">
+    <div class="eyebrow"><span class="rule"></span>NAVIGATE</div>
+    <h1>路線規劃</h1>
+    <p>定位目前位置,選擇想去的景點、美食或住宿,一鍵開啟 Google 地圖導航。</p>
+  </div>
+</header>
+
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <a href="index.html">首頁</a>
+    <a href="destinations.html">景點美食</a>
+    <a href="itineraries.html">我的行程</a>
+    <a href="flights.html">機場航班</a>
+    <a href="accommodation.html">住宿</a>
+    <a href="navigate.html" class="active">路線規劃</a>
+    <a href="packing.html">行李清單</a>
+  </div>
+</nav>
+
+<main>
+  <div class="flight-card">
+    <div class="flight-card-head">
+      <h3>起點</h3>
+    </div>
+    <div id="location-status" class="location-status">尚未定位</div>
+    <div class="plan-toolbar" style="justify-content:flex-start; margin-top:14px;">
+      <button class="ghost-btn" id="locate-btn">📍 使用目前位置</button>
+    </div>
+    <label class="flight-field flight-field-wide" style="margin-top:16px;">
+      <span class="flight-field-label">或手動輸入起點(留空則用目前位置)</span>
+      <input type="text" id="origin-input" placeholder="例如:明洞飯店、首爾站">
+    </label>
+  </div>
+
+  <div class="flight-card">
+    <div class="flight-card-head">
+      <h3>目的地</h3>
+    </div>
+    <label class="flight-field flight-field-wide">
+      <span class="flight-field-label">從清單選擇</span>
+      <select id="destination-select"></select>
+    </label>
+    <label class="flight-field flight-field-wide" style="margin-top:12px;">
+      <span class="flight-field-label">或手動輸入目的地</span>
+      <input type="text" id="destination-input" placeholder="例如:弘大入口站 3號出口">
+    </label>
+  </div>
+
+  <div class="flight-card">
+    <div class="flight-card-head">
+      <h3>交通方式</h3>
+    </div>
+    <div class="mode-row" id="mode-row"></div>
+  </div>
+
+  <div class="plan-toolbar" style="justify-content:flex-start;">
+    <button class="add-btn" id="go-btn" style="font-size:15px; padding:12px 24px;">🧭 開始導航</button>
+  </div>
+  <p class="nav-hint">會開啟新分頁的 Google 地圖導航;手機上若已安裝 Google 地圖 App,通常會直接跳轉開啟 App。</p>
+</main>
+
+<footer>首爾漫遊 · 為自由行旅人設計的簡易規劃工具</footer>
+
+<script src="data.js"></script>
+<script>
+let coords = null; // { lat, lng }
+let mode = 'transit';
+
+const MODES = [
+  { id:'transit', label:'大眾運輸' },
+  { id:'walking', label:'步行' },
+  { id:'driving', label:'開車 / 計程車' },
+  { id:'bicycling', label:'騎乘' }
+];
+
+function buildDestinationOptions(){
+  const select = document.getElementById('destination-select');
+  let html = '<option value="">— 請選擇 —</option>';
+
+  AREAS.forEach(area => {
+    html += `<optgroup label="${area.name}">`;
+    area.spots.forEach(s => {
+      const q = s.mapQuery || s.n;
+      html += `<option value="${q}">${s.n}</option>`;
+    });
+    html += `</optgroup>`;
+  });
+
+  html += `<optgroup label="美食">`;
+  FOOD.forEach(f => {
+    const q = f.mapQuery || f.n;
+    html += `<option value="${q}">${f.n}</option>`;
+  });
+  html += `</optgroup>`;
+
+  const stays = loadStays();
+  if(stays.length > 0){
+    html += `<optgroup label="我的住宿">`;
+    stays.forEach(s => {
+      if(s.address){
+        html += `<option value="${s.address}">${s.name || '住宿'}</option>`;
+      }
+    });
+    html += `</optgroup>`;
+  }
+
+  select.innerHTML = html;
+}
+
+function renderModes(){
+  document.getElementById('mode-row').innerHTML = MODES.map(m =>
+    `<button class="chip mode-btn ${mode===m.id?'active':''}" data-mode="${m.id}">${m.label}</button>`
+  ).join('');
+  document.querySelectorAll('[data-mode]').forEach(btn =>
+    btn.onclick = () => { mode = btn.dataset.mode; renderModes(); });
+}
+
+document.getElementById('locate-btn').onclick = () => {
+  const statusEl = document.getElementById('location-status');
+  if(!('geolocation' in navigator)){
+    statusEl.textContent = '這個瀏覽器不支援定位功能,請改用下方手動輸入起點。';
+    statusEl.className = 'location-status error';
+    return;
+  }
+  statusEl.textContent = '定位中…';
+  statusEl.className = 'location-status loading';
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      coords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      statusEl.textContent = `已定位:${coords.lat.toFixed(5)}, ${coords.lng.toFixed(5)}`;
+      statusEl.className = 'location-status success';
+    },
+    (err) => {
+      coords = null;
+      statusEl.textContent = '無法取得目前位置(可能拒絕了定位權限),請改用下方手動輸入起點。';
+      statusEl.className = 'location-status error';
+    },
+    { enableHighAccuracy: true, timeout: 10000 }
+  );
+};
+
+document.getElementById('go-btn').onclick = () => {
+  const originInput = document.getElementById('origin-input').value.trim();
+  const destSelect = document.getElementById('destination-select').value;
+  const destInput = document.getElementById('destination-input').value.trim();
+
+  const destination = destInput || destSelect;
+  if(!destination){
+    alert('請先選擇或輸入目的地');
+    return;
+  }
+
+  const params = new URLSearchParams();
+  params.set('api', '1');
+  params.set('destination', destination);
+  params.set('travelmode', mode);
+
+  if(originInput){
+    params.set('origin', originInput);
+  } else if(coords){
+    params.set('origin', `${coords.lat},${coords.lng}`);
+  }
+  // If neither origin input nor coords available, omit origin —
+  // Google Maps will default to the device's current location.
+
+  const url = 'https://www.google.com/maps/dir/?' + params.toString();
+  window.open(url, '_blank', 'noopener');
+};
+
+buildDestinationOptions();
+renderModes();
+</script>
+</body>
+</html>
