@@ -93,6 +93,11 @@ function cardHTML(item, areaName){
          <span class="map-icon">📍</span>在地圖上查看
        </a>`
     : '';
+  const siteRow = item.site
+    ? `<a class="map-link" href="${item.site}" target="_blank" rel="noopener">
+         <span class="map-icon">🔗</span>官方網站
+       </a>`
+    : '';
   return `
   <div class="card">
     <div class="card-top">
@@ -104,6 +109,7 @@ function cardHTML(item, areaName){
     <p class="desc">${item.d}</p>
     ${hoursRow}
     ${mapRow}
+    ${siteRow}
     <div class="card-foot">
       <span class="area-label">${areaName || ''}</span>
       <button class="add-btn ${planned?'added':''}" data-add="${item.n}">
