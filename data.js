@@ -22,9 +22,9 @@ const AREAS = [
     { n:'Ader Error Hannam Space', tag:'選物', d:'韓國潮流品牌 Ader Error 的概念空間,常有限定商品與裝置藝術。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Ader Error Hannam Space Seoul', site:'https://adererror.com/kr' }
   ]},
   { id:'sinsa', name:'新沙洞林蔭道', spots:[
-    { n:'TAMBURINS Flagship Store Sinsa', tag:'香氛', d:'新沙洞林蔭道旗艦店,建築本身即為藝術裝置。', hours:'11:00–21:00(依官方公告調整)', mapQuery:'Tamburins Flagship Store Sinsa Seoul', site:'https://tamburins.com' },
-    { n:'Gentle Monster Flagship Store Sinsa', tag:'選物', d:'太陽眼鏡品牌旗艦店,以前衛展場式陳列聞名。', hours:'11:00–21:00(依官方公告調整)', mapQuery:'Gentle Monster Flagship Sinsa Seoul', site:'https://www.gentlemonster.com' },
-    { n:'FRONT SEOUL', tag:'咖啡', d:'歐式復古建築改建的咖啡廳,戶外座位適合享用手沖咖啡與甜點。', hours:'11:00–22:00(依店家公告調整)', mapQuery:'Front Seoul Cafe Sinsa' }
+    { n:'TAMBURINS Flagship Store Sinsa', tag:'香氛', d:'新沙洞林蔭道旗艦店,建築本身即為藝術裝置。', hours:'11:00–21:00(依官方公告調整)', mapQuery:'Tamburins Flagship Store Sinsa Seoul', site:'https://www.tamburins.com/en/store/korea/' },
+    { n:'Gentle Monster Flagship Store Sinsa', tag:'選物', d:'太陽眼鏡品牌旗艦店,以前衛展場式陳列聞名。', hours:'11:00–21:00(依官方公告調整)', mapQuery:'Gentle Monster Flagship Sinsa Seoul', site:'https://www.gentlemonster.com/int/ko?srsltid=AU7gw4XtasrJzp1emSvZDexukb4-nFitWrmaWiZjBgzgqmbaPE0o2_bj' },
+    { n:'FRONT SEOUL', tag:'咖啡', d:'歐式復古建築改建的咖啡廳,戶外座位適合享用手沖咖啡與甜點。', hours:'11:00–22:00(依店家公告調整)', mapQuery:'Front Seoul Cafe Sinsa', site:'https://www.instagram.com/front_seoul/' }
   ]},
   { id:'haebangchon', name:'解放村', spots:[
     { n:'解放村新興市場', tag:'夜生活', d:'舊市場改建的文青聚落,餐酒館林立,可遠眺 N 首爾塔與山城夜景。', hours:'依店家而異,傍晚後最熱鬧', mapQuery:'Haebangchon Sinheung Market Seoul' }
