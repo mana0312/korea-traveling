@@ -30,7 +30,7 @@ const AREAS = [
     { n:'解放村新興市場', tag:'夜生活', d:'舊市場改建的文青聚落,餐酒館林立,可遠眺 N 首爾塔與山城夜景。', hours:'依店家而異,傍晚後最熱鬧', mapQuery:'Haebangchon Sinheung Market Seoul' }
   ]},
   { id:'banpo', name:'盤浦漢江公園', spots:[
-    { n:'盤浦漢江公園月光彩虹噴泉', tag:'夜景', d:'盤浦大橋兩側噴水造景,夜間點燈搭配音樂演出,是漢江經典夜景。', hours:'噴泉表演約每日20:00起,依季節調整,建議事先查詢當日場次', mapQuery:'Banpo Hangang Park Moonlight Rainbow Fountain', site:'https://hangang.seoul.go.kr' }
+    { n:'盤浦漢江公園月光彩虹噴泉', tag:'夜景', d:'盤浦大橋兩側噴水造景,夜間點燈搭配音樂演出,是漢江經典夜景。', hours:'噴泉表演約每日20:00起,依季節調整,建議事先查詢當日場次', mapQuery:'Banpo Hangang Park Moonlight Rainbow Fountain', site:'https://hangang.seoul.go.kr/' }
   ]},
   { id:'seongsu', name:'聖水洞', spots:[
     { n:'Dior 聖水概念店', tag:'選物', d:'精品品牌在聖水洞打造的概念空間,外觀本身就是熱門拍照點。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Dior Seongsu Seoul' },
