@@ -33,7 +33,7 @@ const AREAS = [
     { n:'盤浦漢江公園月光彩虹噴泉', tag:'夜景', d:'盤浦大橋兩側噴水造景,夜間點燈搭配音樂演出,是漢江經典夜景。', hours:'噴泉表演約每日20:00起,依季節調整,建議事先查詢當日場次', mapQuery:'Banpo Hangang Park Moonlight Rainbow Fountain', site:'https://hangang.seoul.go.kr/' }
   ]},
   { id:'seongsu', name:'聖水洞', spots:[
-    { n:'Dior 聖水概念店', tag:'選物', d:'精品品牌在聖水洞打造的概念空間,外觀本身就是熱門拍照點。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Dior Seongsu Seoul' },
+    { n:'Dior 聖水概念店', tag:'選物', d:'精品品牌在聖水洞打造的概念空間,外觀本身就是熱門拍照點。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Dior Seongsu Seoul', site:'https://www.dior.com/ko_kr/fashion' },
     { n:'Musinsa Seongsu', tag:'選物', d:'韓國最大時尚電商 Musinsa 的實體概念店,匯集多個潮流品牌。', hours:'11:00–22:00(依官方公告調整)', mapQuery:'Musinsa Seongsu Seoul', site:'https://www.musinsa.com' },
     { n:'LCDC Seoul', tag:'選物', d:'複合式選物與展覽空間,工業風建築聚集多間設計品牌。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'LCDC Seoul Seongsu' },
     { n:'Stand Oil 旗艦店', tag:'選物', d:'韓國生活選物品牌,聖水洞旗艦店空間簡約質感。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Stand Oil Flagship Store Seongsu' },
