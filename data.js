@@ -6,8 +6,8 @@ const AREAS = [
     { n:'仁寺洞', tag:'購物', d:'傳統工藝品店與茶館聚集的老街,適合買伴手禮。', hours:'約10:00–20:00(依店家而異)', mapQuery:'Insadong Seoul' },
     { n:'昌德宮後苑', tag:'古蹟', d:'需預約導覽的祕苑,韓國唯一列入世界遺產的宮殿。', hours:'09:00–17:30(週一公休,後苑需預約導覽場次)', mapQuery:'Changdeokgung Palace Seoul', site:'https://royal.khs.go.kr/ROYAL/contents/menuInfo-gbg.do?grpCode=cdg' },
     { n:'三清洞', tag:'散步', d:'北村與景福宮旁的老街區,巷弄裡藏著手工藝店與韓屋咖啡廳。', hours:'全天開放,店家約10:00–21:00', mapQuery:'Samcheong-dong Seoul' },
-    { n:'藝人韓服', tag:'韓服體驗', d:'北村人氣韓服租借店,提供多款傳統與改良式韓服供拍照體驗,租借後可免費參觀景福宮。', hours:'09:00–19:00(依店家公告調整)', mapQuery:'예니스한복 북촌' },
-    { n:'西花韓服', tag:'韓服體驗', d:'北村另一間人氣韓服店,款式多元,提供變裝與造型服務。', hours:'09:00–19:00(依店家公告調整)', mapQuery:'서화한복 북촌' }
+    { n:'藝人韓服', tag:'韓服體驗', d:'北村人氣韓服租借店,提供多款傳統與改良式韓服供拍照體驗,租借後可免費參觀景福宮。', hours:'09:00–19:00(依店家公告調整)', mapQuery:'예니스한복 북촌', site:'https://www.instagram.com/theartisthanbok/'  },
+    { n:'西花韓服', tag:'韓服體驗', d:'北村另一間人氣韓服店,款式多元,提供變裝與造型服務。', hours:'09:00–19:00(依店家公告調整)', mapQuery:'서화한복 북촌', site:'https://seohwahanbok.net/'  }
   ]},
   { id:'myeongdong', name:'明洞', spots:[
     { n:'明洞街道', tag:'購物', d:'美妝店與街邊小吃密集,晚上七點後最熱鬧。', hours:'全天開放,店家約10:00–22:00', mapQuery:'Myeongdong Shopping Street Seoul' },
