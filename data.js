@@ -15,11 +15,11 @@ const AREAS = [
     { n:'明洞聖堂', tag:'建築', d:'首爾最早的哥德式教堂建築之一,鬧區中的靜謐角落。', hours:'06:00–21:00(彌撒時間不開放參觀)', mapQuery:'Myeongdong Cathedral Seoul', site:'https://www.mdsd.or.kr/' }
   ]},
   { id:'hannam', name:'漢南洞', spots:[
-    { n:'Mardi Mercredi 旗艦店', tag:'選物', d:'法式插畫風韓國設計品牌,漢南洞旗艦店空間感十足,適合拍照。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Mardi Mercredi Hannam Flagship Store Seoul', site:'https://mardimercredi.com' },
-    { n:'Tamburins 香氛旗艦店(漢南)', tag:'香氛', d:'藝術裝置感十足的香氛品牌旗艦店,常有限定展覽空間。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Tamburins Hannam Flagship Store Seoul', site:'https://tamburins.com' },
-    { n:'Rockfish Weatherwear', tag:'選物', d:'機能戶外風格選物店,漢南洞潮流地標之一。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Rockfish Weatherwear Hannam Seoul' },
-    { n:'Emis', tag:'選物', d:'簡約質感風格的韓國選物品牌,漢南洞直營店。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Emis Hannam Seoul' },
-    { n:'Ader Error Hannam Space', tag:'選物', d:'韓國潮流品牌 Ader Error 的概念空間,常有限定商品與裝置藝術。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Ader Error Hannam Space Seoul', site:'https://adererror.com' }
+    { n:'Mardi Mercredi 旗艦店', tag:'選物', d:'法式插畫風韓國設計品牌,漢南洞旗艦店空間感十足,適合拍照。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Mardi Mercredi Hannam Flagship Store Seoul', site:'https://mardimercredi.com/' },
+    { n:'Tamburins 香氛旗艦店(漢南)', tag:'香氛', d:'藝術裝置感十足的香氛品牌旗艦店,常有限定展覽空間。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Tamburins Hannam Flagship Store Seoul', site:'https://www.tamburins.com/en/store/korea/' },
+    { n:'Rockfish Weatherwear', tag:'選物', d:'機能戶外風格選物店,漢南洞潮流地標之一。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Rockfish Weatherwear Hannam Seoul', site:'https://rockfish-weatherwear.co.kr/' },
+    { n:'Emis', tag:'選物', d:'簡約質感風格的韓國選物品牌,漢南洞直營店。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Emis Hannam Seoul', site:'https://en.emis.kr/'  },
+    { n:'Ader Error Hannam Space', tag:'選物', d:'韓國潮流品牌 Ader Error 的概念空間,常有限定商品與裝置藝術。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Ader Error Hannam Space Seoul', site:'https://adererror.com/kr' }
   ]},
   { id:'sinsa', name:'新沙洞林蔭道', spots:[
     { n:'TAMBURINS Flagship Store Sinsa', tag:'香氛', d:'新沙洞林蔭道旗艦店,建築本身即為藝術裝置。', hours:'11:00–21:00(依官方公告調整)', mapQuery:'Tamburins Flagship Store Sinsa Seoul', site:'https://tamburins.com' },
