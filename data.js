@@ -99,7 +99,8 @@ const FOOD = [
   { n:'豬腳小姐 Myth Jokbal(弘大總店)', tag:'豬腳', d:'必點蒜味豬腳,隨餐附贈蒜辣刀削麵湯底與生菜沙拉。', hours:'16:00–翌日02:00(依店家而異)', mapQuery:'Myth Jokbal Hongdae Seoul' },
   { n:'BHC 炸雞(外送)', tag:'炸雞', d:'韓國連鎖炸雞品牌,適合外帶到漢江公園配啤酒野餐。', hours:'依門市而異,約11:00–翌日01:00', mapQuery:'BHC Chicken Seoul', site:'https://www.bhc.co.kr' },
   { n:'Goobne 炸雞(外送)', tag:'炸雞', d:'韓國人氣烤雞連鎖品牌,口味較清爽,適合漢江野餐外送。', hours:'依門市而異,約11:00–24:00', mapQuery:'Goobne Chicken Seoul', site:'https://www.goobne.co.kr' },
-  { n:'PURADAK CHICKEN(푸라닭치킨)', tag:'炸雞', d:'韓國人氣連鎖炸雞品牌,採獨創「烤炸」雙重工法,外皮酥脆內裡多汁,招牌黑蒜炸雞(블랙알리오)與辣椒美乃滋炸雞是必點,包裝也走質感路線。', hours:'依門市而異,建議出發前於地圖 App 確認最近分店營業時間', mapQuery:'PURADAK CHICKEN Seoul' }
+  { n:'PURADAK CHICKEN(푸라닭치킨)', tag:'炸雞', d:'韓國人氣連鎖炸雞品牌,採獨創「烤炸」雙重工法,外皮酥脆內裡多汁,招牌黑蒜炸雞(블랙알리오)與辣椒美乃滋炸雞是必點,包裝也走質感路線。', hours:'依門市而異,建議出發前於地圖 App 確認最近分店營業時間', mapQuery:'PURADAK CHICKEN Seoul' },
+  { n:'東大門獵奇辣炒年糕(동대문엽기떡볶)', tag:'年糕', d:'韓國最知名的極辣炒年糕連鎖品牌，主打大盆裝，適合多人分享（建議至少3人以上食用）。', hours:'依00:30–06:00, 11:30–00:00', mapQuery:'동대문엽기떡볶이 동대문본점' }  
 ];
 
 const TRANSIT = [
