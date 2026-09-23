@@ -13,7 +13,6 @@ const AREAS = [
     { n:'明洞街道', tag:'購物', d:'美妝店與街邊小吃密集,晚上七點後最熱鬧。', hours:'全天開放,店家約10:00–22:00', mapQuery:'Myeongdong Shopping Street Seoul' },
     { n:'南山首爾塔', tag:'夜景', d:'搭纜車上南山,情人鎖牆是必訪拍照點。', hours:'10:00–23:00(展望台,末班纜車提早)', mapQuery:'N Seoul Tower', site:'https://www.seoultower.co.kr/' },
     { n:'明洞聖堂', tag:'建築', d:'首爾最早的哥德式教堂建築之一,鬧區中的靜謐角落。', hours:'06:00–21:00(彌撒時間不開放參觀)', mapQuery:'Myeongdong Cathedral Seoul', site:'https://www.mdsd.or.kr/' }
-    { n:'韓國麗芬聚國際皮膚科 明洞國際旗艦店', tag:'皮膚科診所', d:'是韓國知名的連鎖輕奢醫美皮膚科品牌，中韓價格統一，官網與現場標價清楚。', hours:'10:00–19:00', mapQuery:'쁨글로벌 의원 명동점', site:'https://global.ppeum16.com/?lan=global_eng' }
   ]},
   { id:'hannam', name:'漢南洞', spots:[
     { n:'Mardi Mercredi 旗艦店', tag:'選物', d:'法式插畫風韓國設計品牌,漢南洞旗艦店空間感十足,適合拍照。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Mardi Mercredi Hannam Flagship Store Seoul', site:'https://mardimercredi.com/' },
