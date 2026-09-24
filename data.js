@@ -40,7 +40,6 @@ const AREAS = [
     { n:'LCDC Seoul', tag:'選物', d:'複合式選物與展覽空間,工業風建築聚集多間設計品牌。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'LCDC Seoul Seongsu' },
     { n:'Stand Oil 旗艦店', tag:'選物', d:'韓國生活選物品牌,聖水洞旗艦店空間簡約質感。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Stand Oil Flagship Store Seongsu' },
     { n:'Onion 聖水店', tag:'咖啡', d:'廢墟工業風改建的人氣麵包咖啡廳,聖水洞地標之一。', hours:'07:00–22:00(依店家公告調整)', mapQuery:'Onion Cafe Seongsu Seoul' },
-    { n:'Nudake Seongsu', tag:'咖啡', d:'前衛藝術系甜點咖啡廳,以造型甜點與空間設計聞名。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'Nudake Seongsu Seoul' },
     { n:'말질로', tag:'選物/美食', d:'聖水洞話題新開店家,詳細資訊建議出發前再查詢最新評價與確切位置。', hours:'依店家公告為準', mapQuery:'말질로 성수' },
     { n:'CHAAKAN 착한구두 성수 스페이스', tag:'選物鞋店', d:'韓國鞋類品牌「착한구두」在聖水洞打造的概念空間。', hours:'11:00–20:00(依官方公告調整)', mapQuery:'착한구두 성수 스페이스' },
     { n:'MintChoco World(민트초코월드)', tag:'主題快閃店', d:'以薄荷巧克力為主題的話題快閃體驗空間,常有限定周邊販售,建議出發前確認展期是否仍在。', hours:'依快閃期間與官方公告為準', mapQuery:'민트초코월드 성수' }
