@@ -27,7 +27,7 @@ const AREAS = [
     { n:'Gentle Monster Flagship Store Sinsa', tag:'選物', d:'太陽眼鏡品牌旗艦店,以前衛展場式陳列聞名。', hours:'11:00–21:00(依官方公告調整)', mapQuery:'Gentle Monster Flagship Sinsa Seoul' },
     { n:'FRONT SEOUL', tag:'咖啡', d:'歐式復古建築改建的咖啡廳,戶外座位適合享用手沖咖啡與甜點。', hours:'11:00–22:00(依店家公告調整)', mapQuery:'Front Seoul Cafe Sinsa' },
     { n:'Milestone Coffee 新沙店', tag:'咖啡', d:'推薦:維也納咖啡跟甜點提拉米蘇。', hours:'10:00–20:00；四五休息', mapQuery:'마일스톤 커피 신사' },
-    { n:'SAPPUN新沙林蔭大道', tag:'女鞋', d:'人氣平價女鞋品牌，結合法式優雅與寬敞空間的品牌旗艦店。價格親民，平均約5萬至6萬韓元', hours:'週一至週日 11:00 – 21:00', mapQuery:'사뿐 가로수길 플래그십스토어 (SAPPUN)', site:'https://www.sappun.co.kr/?srsltid=AU7gw4U8I8lM7BEtFGvvdtBV3bjkFIcHz-fAadRc6bAgHNLu_rAQqGQU'   },
+    { n:'SAPPUN 新沙林蔭大道', tag:'女鞋', d:'人氣平價女鞋品牌，結合法式優雅與寬敞空間的品牌旗艦店。價格親民，平均約5萬至6萬韓元', hours:'週一至週日 11:00 – 21:00', mapQuery:'사뿐 가로수길 플래그십스토어 (SAPPUN)', site:'https://www.sappun.co.kr/?srsltid=AU7gw4U8I8lM7BEtFGvvdtBV3bjkFIcHz-fAadRc6bAgHNLu_rAQqGQU'   },
     { n:'Dongnyeok동녘（Korean Restaurant Dongnyeok）', tag:'餐廳', d:'青陽虎濕煎餅、韓豚蒜味排骨燉、韓豚三層肉切片水煮白切肉、蜂巢瑪格麗米酒。', hours:'一~四11:00–15:00, 16:00–04:30；五~日11:00–15:00, 16:00–05:30', mapQuery:'Korean Restaurant Dongnyeok', site:'https://www.instagram.com/dongnyeok_official'  }
   ]},
   { id:'haebangchon', name:'解放村', spots:[
