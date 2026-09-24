@@ -25,7 +25,8 @@ const AREAS = [
   { id:'sinsa', name:'新沙洞林蔭道', spots:[
     { n:'TAMBURINS Flagship Store Sinsa', tag:'香氛', d:'新沙洞林蔭道旗艦店,建築本身即為藝術裝置。', hours:'11:00–21:00(依官方公告調整)', mapQuery:'Tamburins Flagship Store Sinsa Seoul' },
     { n:'Gentle Monster Flagship Store Sinsa', tag:'選物', d:'太陽眼鏡品牌旗艦店,以前衛展場式陳列聞名。', hours:'11:00–21:00(依官方公告調整)', mapQuery:'Gentle Monster Flagship Sinsa Seoul' },
-    { n:'FRONT SEOUL', tag:'咖啡', d:'歐式復古建築改建的咖啡廳,戶外座位適合享用手沖咖啡與甜點。', hours:'11:00–22:00(依店家公告調整)', mapQuery:'Front Seoul Cafe Sinsa' }
+    { n:'FRONT SEOUL', tag:'咖啡', d:'歐式復古建築改建的咖啡廳,戶外座位適合享用手沖咖啡與甜點。', hours:'11:00–22:00(依店家公告調整)', mapQuery:'Front Seoul Cafe Sinsa' },
+    { n:'Dongnyeok동녘（Korean Restaurant Dongnyeok）', tag:'餐廳', d:'青陽虎濕煎餅、韓豚蒜味排骨燉、韓豚三層肉切片水煮白切肉、蜂巢瑪格麗米酒。', hours:'一~四11:00–15:00, 16:00–04:30；五~日11:00–15:00, 16:00–05:30', mapQuery:'Korean Restaurant Dongnyeok', site:'https://www.instagram.com/dongnyeok_official'  }
   ]},
   { id:'haebangchon', name:'解放村', spots:[
     { n:'解放村新興市場', tag:'夜生活', d:'舊市場改建的文青聚落,餐酒館林立,可遠眺 N 首爾塔與山城夜景。', hours:'依店家而異,傍晚後最熱鬧', mapQuery:'Haebangchon Sinheung Market Seoul' }
@@ -297,9 +298,10 @@ const SEED_TRIP_DATES = { 1:'2026-09-26', 2:'2026-09-27', 3:'2026-09-28', 4:'202
 const SEED_PLAN = {
   1: [
     { name:'清州入境與轉乘高鐵進首爾', start:'07:00', end:'10:30' },
-    { name:'漢南洞:潮流商圈選物與巡禮', start:'11:30', end:'16:00' },
-    { name:'新沙洞林蔭道:旗艦店逛街與咖啡', start:'16:00', end:'18:30' },
-    { name:'晚餐:小小烤腸(소소막창)', start:'18:30', end:'20:00' },
+    { name:'漢南洞:潮流商圈選物與巡禮', start:'11:30', end:'15:30' },
+    { name:'晚餐:小小烤腸(소소막창)', start:'16:00', end:'17:00' },
+    { name:'新沙洞林蔭道:旗艦店逛街與咖啡', start:'18:00', end:'18:30' },
+    { name:'晚餐:Dongnyeok（동녘）', start:'18:30', end:'20:00' },
     { name:'解放村:新興市場夜景小酌', start:'20:00', end:'21:00' },
     { name:'盤浦漢江公園:夜景與外送炸雞', start:'21:00', end:'22:30' }
   ],
@@ -308,8 +310,9 @@ const SEED_PLAN = {
     { name:'北村韓屋村/景福宮:韓服體驗', start:'10:30', end:'12:30' },
     { name:'午餐:三清洞麵片湯', start:'12:30', end:'14:00' },
     { name:'益善洞:韓屋巷弄與質感咖啡廳', start:'14:30', end:'17:30' },
-    { name:'晚餐:益善洞烤肉街', start:'18:00', end:'20:00' },
-    { name:'清溪川夜間散步', start:'20:00', end:'21:30' }
+    { name:'韓國麗芬聚國際皮膚科 明洞國際旗艦店:已預約18:00', start:'18:00', end:'19:00' },
+    { name:'晚餐:益善洞烤肉街', start:'19:30', end:'20:30' },
+    { name:'清溪川夜間散步', start:'20:30', end:'21:30' }
   ],
   3: [
     { name:'聖水洞:工業風潮流重鎮與午餐', start:'11:00', end:'15:30' },
