@@ -1,4 +1,3 @@
-javascript
 /* ---------------- Shared data ---------------- */
 const AREAS = [
   { id:'jongno', name:'鐘路 / 北村', spots:[
@@ -342,8 +341,8 @@ const SEED_STAY = {
 
 function seedTripDataIfNeeded(){
   try{
-    if(localStorage.getItem('seoul-seed-v1')) return;
-    localStorage.setItem('seoul-seed-v1', '1');
+    if(localStorage.getItem('seoul-seed-v2')) return;
+    localStorage.setItem('seoul-seed-v2', '1');
 
     const plan = loadPlan();
     const planIsEmpty = Object.values(plan).every(list => list.length === 0);
