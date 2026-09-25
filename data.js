@@ -1,3 +1,4 @@
+javascript
 /* ---------------- Shared data ---------------- */
 const AREAS = [
   { id:'jongno', name:'鐘路 / 北村', spots:[
